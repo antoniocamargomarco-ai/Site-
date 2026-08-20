@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DEDSEC // ACCESS CONTROL</title>
+  <title>DEDSEC // ACESSO AO SISTEMA</title>
   <style>
     * {
       box-sizing: border-box;
@@ -18,113 +18,93 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
     }
-    .grid-bg {
-      position: absolute;
+    .login-box {
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid #00ff66;
+      padding: 30px;
       width: 100%;
-      height: 100%;
-      background: linear-gradient(rgba(0, 255, 102, 0.03) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(0, 255, 102, 0.03) 1px, transparent 1px);
-      background-size: 20px 20px;
-      z-index: 1;
-    }
-    .terminal-box {
-      position: relative;
-      z-index: 2;
-      background-color: rgba(10, 10, 10, 0.95);
-      border: 2px solid #00ff66;
-      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
-      padding: 40px;
-      width: 360px;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
       text-align: center;
     }
     h1 {
-      font-size: 1.5rem;
       color: #ff0055;
-      text-transform: uppercase;
+      font-size: 1.5rem;
       margin-bottom: 20px;
-      letter-spacing: 2px;
-      text-shadow: 2px 2px #00ffff;
+      text-shadow: 1px 1px #00ffff;
     }
-    p {
-      font-size: 0.85rem;
-      margin-bottom: 20px;
-      color: #888;
-    }
-    input[type="password"] {
+    input {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
+      margin-bottom: 15px;
       background: #000;
       border: 1px solid #00ff66;
       color: #00ff66;
       font-family: inherit;
-      font-size: 1rem;
-      margin-bottom: 15px;
-      outline: none;
       text-align: center;
+      outline: none;
     }
-    input[type="password"]:focus {
-      box-shadow: 0 0 8px #00ff66;
+    input:focus {
+      box-shadow: 0 0 5px #00ff66;
     }
     button {
       width: 100%;
-      padding: 12px;
-      background-color: #ff0055;
+      padding: 10px;
+      background: #ff0055;
       color: #fff;
       border: none;
       font-family: inherit;
       font-weight: bold;
-      text-transform: uppercase;
       cursor: pointer;
+      text-transform: uppercase;
       letter-spacing: 1px;
     }
     button:hover {
-      background-color: #00ff66;
+      background: #00ffff;
       color: #000;
-      box-shadow: 0 0 10px #00ff66;
+      box-shadow: 0 0 10px #00ffff;
     }
-    #status {
+    #msg {
       margin-top: 15px;
-      font-size: 0.9rem;
-      height: 20px;
-      font-weight: bold;
+      font-size: 0.85rem;
+      color: #ff0055;
     }
   </style>
 </head>
 <body>
 
-  <div class="grid-bg"></div>
-
-  <div class="terminal-box">
-    <h1>[ DED_SEC ]</h1>
-    <p>SISTEMA CRIPTOGRAFADO // INSIRA A CHAVE DE ACESSO</p>
+  <div class="login-box">
+    <h1>// ACESSO_RESTRITO</h1>
+    <p style="margin-bottom: 15px; font-size: 0.85rem; color: #ccc;">DIGITE A SENHA DE ACESSO:</p>
     
-    <input type="password" id="passInput" placeholder="> SENHA_">
-    <button onclick="checarAcesso()">[ INICIALIZAR ]</button>
+    <input type="password" id="senhaInput" placeholder="S E N H A">
+    <button onclick="validarAcesso()">ENTRAR</button>
     
-    <div id="status"></div>
+    <div id="msg"></div>
   </div>
 
   <script>
-    function checarAcesso() {
-      const senhaCorreta = "2009"; // Defina sua senha aqui
-      const entrada = document.getElementById("passInput").value;
-      const status = document.getElementById("status");
+    function validarAcesso() {
+      const senhaCorreta = "2009"; // Altere para a senha que desejar
+      const senhaDigitada = document.getElementById("senhaInput").value;
+      const msg = document.getElementById("msg");
 
-      if (entrada === senhaCorreta) {
-        status.style.color = "#00ff66";
-        status.innerText = "ACESSO CONCEDIDO...";
-        
-        // Redireciona para a segunda página após 1 segundo
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 1000);
+      if (senhaDigitada === senhaCorreta) {
+        // Grava a autorização na sessão do navegador
+        sessionStorage.setItem("logado", "true");
+        window.location.href = "dashboard.html";
       } else {
-        status.style.color = "#ff0055";
-        status.innerText = "ERRO: SENHA INCORRETA";
+        msg.innerText = "ACESSO NEGADO: SENHA INCORRETA";
       }
     }
+
+    // Permite apertar Enter para entrar
+    document.getElementById("senhaInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        validarAcesso();
+      }
+    });
   </script>
 
 </body>
