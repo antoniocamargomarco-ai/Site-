@@ -151,7 +151,7 @@
     <div class="card">
       <h2>> Removedor de Bloqueio de tela do quiz</h2>
        <p>Para usar presione CTRL+SHIFT+B e abaixo das abas dos site vai aparecer uma barra, pressione botao direito do mouse no meio da barra e clique adiconar pagina e cole o codigo na url (nao pode ter nada na url apenas o codigo).</p>
-      <p id="card1-text" style="display:none;">document.querySelectorAll('.modal-container').forEach(el => el.remove())</p>
+      <p id="card1-text" style="display:none;">javascript:(function(){document.querySelectorAll('.modal-container').forEach(el => el.remove());})();</p>
       <div class="btn-group">
       <button class="btn-action btn-copy" onclick="copiarTexto('card1-text', this)">COPIAR</button>
       </div>
@@ -160,7 +160,7 @@
     <div class="card">
       <h2>> Habilitar Cola no Redacao Parana</h2>
       <p>Para usar presione CTRL+SHIFT+B e abaixo das abas dos site vai aparecer uma barra, pressione botao direito do mouse no meio da barra e clique adiconar pagina e cole o codigo na url (nao pode ter nada na url apenas o codigo).</p>
-      <p id="card2-text" style="display:none;">document.addEventListener('paste', e => e.stopPropagation(), true);</p>
+      <p id="card2-text" style="display:none;">javascript:(function(){document.addEventListener('paste', e => e.stopPropagation(), true);})();</p>
       <div class="btn-group">
       <button class="btn-action btn-copy" onclick="copiarTexto('card2-text', this)">COPIAR</button>
       </div>
